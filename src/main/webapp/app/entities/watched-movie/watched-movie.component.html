@@ -1,0 +1,72 @@
+<div>
+    <h2>
+        <span>Watched Movies</span>
+        <button class="btn btn-primary float-right jh-create-entity create-watched-movie" [routerLink]="['/', { outlets: { popup: ['watched-movie-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Watched Movie
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="watchedMovies">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdOn"><span>Created On</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="times"><span>Times</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="movieId"><span>Movie</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="userId"><span>User</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let watchedMovie of watchedMovies ;trackBy: trackId">
+                <td><a [routerLink]="['../watched-movie', watchedMovie.id ]">{{watchedMovie.id}}</a></td>
+                <td>{{watchedMovie.createdOn | date:'medium'}}</td>
+                <td>{{watchedMovie.times}}</td>
+                <td>
+                    <div *ngIf="watchedMovie.movieId">
+                        <a [routerLink]="['../movie', watchedMovie.movieId  ]" >{{watchedMovie.movieId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="watchedMovie.userId">
+                        <a [routerLink]="['../profile', watchedMovie.userId  ]" >{{watchedMovie.userId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../watched-movie', watchedMovie.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'watched-movie/'+ watchedMovie.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'watched-movie/'+ watchedMovie.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

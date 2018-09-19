@@ -1,0 +1,14 @@
+version: '2'
+services:
+    thebigscreen-app:
+        image: thebigscreen
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://thebigscreen-postgresql:5432/TheBigScreen
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    thebigscreen-postgresql:
+        extends:
+            file: postgresql.yml
+            service: thebigscreen-postgresql

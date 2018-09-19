@@ -1,0 +1,88 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myPeopleLabel">Create or edit a People</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!people.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="people.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_imdbId">Imdb Id</label>
+            <input type="text" class="form-control" name="imdbId" id="field_imdbId"
+                [(ngModel)]="people.imdbId" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="people.name" required/>
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_gender">Gender</label>
+            <select class="form-control" name="gender" [(ngModel)]="people.gender" id="field_gender" >
+                <option value="NONE">NONE</option>
+                <option value="FEMALE">FEMALE</option>
+                <option value="MALE">MALE</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_biography">Biography</label>
+            <input type="text" class="form-control" name="biography" id="field_biography"
+                [(ngModel)]="people.biography" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_popularity">Popularity</label>
+            <input type="number" class="form-control" name="popularity" id="field_popularity"
+                [(ngModel)]="people.popularity" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_adult">Adult</label>
+            <input type="checkbox" class="form-control" name="adult" id="field_adult"
+                [(ngModel)]="people.adult" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_birthday">Birthday</label>
+            <div class="d-flex">
+                <input id="field_birthday" type="datetime-local" class="form-control" name="birthday" [(ngModel)]="people.birthday"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_placeOfBirth">Place Of Birth</label>
+            <input type="text" class="form-control" name="placeOfBirth" id="field_placeOfBirth"
+                [(ngModel)]="people.placeOfBirth" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_profilePath">Profile Path</label>
+            <input type="text" class="form-control" name="profilePath" id="field_profilePath"
+                [(ngModel)]="people.profilePath" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_deathday">Deathday</label>
+            <div class="d-flex">
+                <input id="field_deathday" type="datetime-local" class="form-control" name="deathday" [(ngModel)]="people.deathday"
+                />
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,28 @@
+<div class="flex-container summary-wrapper" fxLayout="column" [defaultImage]='defaultBackdropImage' [lazyLoad]="'https://image.tmdb.org/t/p/w'+ imageWidth+ '' + (movie$ | async)?.backdropPath"
+  [offset]="'100'">
+
+  <img mat-card-image class="posterPath" [defaultImage]='defaultImage' [lazyLoad]="'https://image.tmdb.org/t/p/w'+ imageWidth+ '' + (movie$ | async)?.posterPath"
+    [offset]="'100'">
+
+  <div class='votes'>
+    <span>Vote average: {{(movie$ | async)?.voteAverage}} </span>
+    <span>Vote count: {{(movie$ | async)?.voteCount}}</span>
+  </div>
+</div>
+<div class="flex-container info-summary-wrapper" fxLayout="column">
+  <ul class='stats'>
+    <li>Released: {{(movie$ | async)?.releaseDate | date}}</li>
+    <li>Status: {{(movie$ | async)?.status}}</li>
+    <li>Runtime: {{(movie$ | async)?.runtime}} minutes</li>
+    <li>Budget: {{(movie$ | async)?.budget | currency:'$'}}</li>
+    <li>Popularity: {{(movie$ | async)?.popularity}}</li>
+    <li>Language: {{(movie$ | async)?.originalLanguage}} </li>
+    <!-- <li>Genres: {{(movie$ | async)?.voteAverage}}</li> -->
+  </ul>
+  <div class='overview'>
+    <h5>{{(movie$ | async)?.overview}}</h5>
+  </div>
+  <div class='actors'>
+    <h2>Actors</h2>
+  </div>
+</div>

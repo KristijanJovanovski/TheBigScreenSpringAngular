@@ -1,0 +1,38 @@
+
+<div *ngIf="bookmarkedMovie">
+    <h2><span>Bookmarked Movie</span> {{bookmarkedMovie.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Created On</span></dt>
+        <dd>
+            <span>{{bookmarkedMovie.createdOn | date:'medium'}}</span>
+        </dd>
+        <dt><span>Movie</span></dt>
+        <dd>
+            <div *ngIf="bookmarkedMovie.movieId">
+                <a [routerLink]="['/movie', bookmarkedMovie.movieId]">{{bookmarkedMovie.movieId}}</a>
+            </div>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            <div *ngIf="bookmarkedMovie.userId">
+                <a [routerLink]="['/profile', bookmarkedMovie.userId]">{{bookmarkedMovie.userId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'bookmarked-movie/'+ bookmarkedMovie.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

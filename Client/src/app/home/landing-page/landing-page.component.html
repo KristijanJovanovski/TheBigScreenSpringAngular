@@ -1,0 +1,28 @@
+<div class="background">
+  <div class="gradient">
+    <div class="container">
+      <h1>Welcome to The Big Screen</h1>
+      <div *ngIf="!isAuthenticated" class="actions">
+        <a [ngClass]="routeAnimationsElements" mat-raised-button class="actions-main" color="primary" routerLink="login">
+          LogIn
+        </a>
+        <a mat-raised-button class="actions-main" color="accent" routerLink="register" [ngClass]="routeAnimationsElements">
+          Register
+        </a>
+        <br>
+      </div>
+      <h2 *ngIf="isAuthenticated">Now Go visit: </h2>
+      <div *ngIf="isAuthenticated" class="actions">
+        <a [ngClass]="routeAnimationsElements" mat-raised-button class="actions-main" color="primary" routerLink="movies">
+          Movies
+        </a>
+        <a [ngClass]="routeAnimationsElements" mat-raised-button class="actions-main" color="primary" routerLink="people">
+          People
+        </a>
+        <a [ngClass]="routeAnimationsElements" mat-raised-button class="actions-main" color="primary" routerLink="profile">
+          Profile
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

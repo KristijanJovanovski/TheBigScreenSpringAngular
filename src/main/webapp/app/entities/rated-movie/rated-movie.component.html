@@ -1,0 +1,72 @@
+<div>
+    <h2>
+        <span>Rated Movies</span>
+        <button class="btn btn-primary float-right jh-create-entity create-rated-movie" [routerLink]="['/', { outlets: { popup: ['rated-movie-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Rated Movie
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="ratedMovies">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdOn"><span>Created On</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="rate"><span>Rate</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="movieId"><span>Movie</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="userId"><span>User</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let ratedMovie of ratedMovies ;trackBy: trackId">
+                <td><a [routerLink]="['../rated-movie', ratedMovie.id ]">{{ratedMovie.id}}</a></td>
+                <td>{{ratedMovie.createdOn | date:'medium'}}</td>
+                <td>{{ratedMovie.rate}}</td>
+                <td>
+                    <div *ngIf="ratedMovie.movieId">
+                        <a [routerLink]="['../movie', ratedMovie.movieId  ]" >{{ratedMovie.movieId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="ratedMovie.userId">
+                        <a [routerLink]="['../profile', ratedMovie.userId  ]" >{{ratedMovie.userId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../rated-movie', ratedMovie.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'rated-movie/'+ ratedMovie.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'rated-movie/'+ ratedMovie.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

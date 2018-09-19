@@ -1,0 +1,132 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "bookmarkedMovies",
+            "otherEntityName": "bookmarkedMovie",
+            "otherEntityRelationshipName": "movie"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "watchedMovies",
+            "otherEntityName": "watchedMovie",
+            "otherEntityRelationshipName": "movie"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "ratedMovies",
+            "otherEntityName": "ratedMovie",
+            "otherEntityRelationshipName": "movie"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "videos",
+            "otherEntityName": "video",
+            "otherEntityRelationshipName": "movie"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "cast",
+            "otherEntityName": "movieCast",
+            "otherEntityRelationshipName": "movie"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "crew",
+            "otherEntityName": "movieCrew",
+            "otherEntityRelationshipName": "movie"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "tmdbImages",
+            "otherEntityName": "tmdbImage",
+            "otherEntityRelationshipName": "movie"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "movies",
+            "relationshipName": "genres",
+            "otherEntityName": "genre",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "movie",
+            "relationshipName": "keywords",
+            "otherEntityName": "keyword",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "imdbId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "backdropPath",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "posterPath",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "originalTitle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "originalLanguage",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "voteAverage",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "popularity",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "voteCount",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "budget",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "runtime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "revenue",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "releaseDate",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "overview",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "Status",
+            "fieldValues": "RUMORED,PLANNED,IN_PRODUCTION,POST_PRODUCTION,RELEASED,CANCELED"
+        }
+    ],
+    "changelogDate": "20180519190408",
+    "entityTableName": "movies",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true
+}

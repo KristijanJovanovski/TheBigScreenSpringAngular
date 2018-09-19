@@ -1,0 +1,26 @@
+<div class="flex-container" fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="center" class="card-container">
+    <div fxFlex="90%" fxFlex.md="50%" fxFlex.lg="40%">
+      <mat-card>
+        <mat-card-title>Activate</mat-card-title>
+        <mat-card-content>
+          <div fxLayoutAlign="center" *ngIf="(error$ | async)?.title" class="error">{{ (error$ | async).title }}</div>
+          <div fxLayoutAlign="center" *ngIf="(error$ | async)?.details" class="error">{{ (error$ | async).details }}</div>
+          <div fxLayoutAlign="center" *ngIf="(activatedSuccessMessage$ | async)" class="error">{{ (activatedSuccessMessage$ | async) }}</div>
+          <form *ngIf="!(loading$ | async)" (ngSubmit)="submit()" [formGroup]="form" novalidate>
+            <div fxLayout="column" fxLayoutAlign="start stretch">
+              <mat-form-field>
+                <input matInput required type="text" placeholder="Activation code" autocomplete="off" autocorrect="off" autocapitalize="off"
+                  spellcheck="off" formControlName="activationKey">
+              </mat-form-field>
+              <button mat-raised-button color="accent" [disabled]="form.invalid" type="submit">Activate</button>
+            </div>
+          </form>
+          <div fxLayout="row" fxLayoutAlign="center">
+            <mat-spinner *ngIf="loading$ | async"></mat-spinner>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

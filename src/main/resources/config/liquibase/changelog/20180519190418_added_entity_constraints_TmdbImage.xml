@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity TmdbImage.
+    -->
+    <changeSet id="20180519190418-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="movie_id"
+                                 baseTableName="tmdb_images"
+                                 constraintName="fk_tmdb_image_movie_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="movies"/>
+
+        <addForeignKeyConstraint baseColumnNames="people_id"
+                                 baseTableName="tmdb_images"
+                                 constraintName="fk_tmdb_image_people_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="people"/>
+
+    </changeSet>
+</databaseChangeLog>

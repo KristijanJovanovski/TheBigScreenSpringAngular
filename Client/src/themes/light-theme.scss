@@ -1,0 +1,9 @@
+$tbs-light-primary: mat-palette($mat-grey, 200, 500, 300);
+$tbs-light-accent: mat-palette($mat-brown, 200);
+$tbs-light-warn: mat-palette($mat-deep-orange, 200);
+
+$tbs-light-theme: mat-light-theme(
+  $tbs-light-primary,
+  $tbs-light-accent,
+  $tbs-light-warn
+);

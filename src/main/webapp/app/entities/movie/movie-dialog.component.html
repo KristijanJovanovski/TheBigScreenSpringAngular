@@ -1,0 +1,118 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myMovieLabel">Create or edit a Movie</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!movie.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="movie.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_imdbId">Imdb Id</label>
+            <input type="text" class="form-control" name="imdbId" id="field_imdbId"
+                [(ngModel)]="movie.imdbId" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_backdropPath">Backdrop Path</label>
+            <input type="text" class="form-control" name="backdropPath" id="field_backdropPath"
+                [(ngModel)]="movie.backdropPath" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_posterPath">Poster Path</label>
+            <input type="text" class="form-control" name="posterPath" id="field_posterPath"
+                [(ngModel)]="movie.posterPath" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_originalTitle">Original Title</label>
+            <input type="text" class="form-control" name="originalTitle" id="field_originalTitle"
+                [(ngModel)]="movie.originalTitle" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                [(ngModel)]="movie.title" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_originalLanguage">Original Language</label>
+            <input type="text" class="form-control" name="originalLanguage" id="field_originalLanguage"
+                [(ngModel)]="movie.originalLanguage" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_voteAverage">Vote Average</label>
+            <input type="number" class="form-control" name="voteAverage" id="field_voteAverage"
+                [(ngModel)]="movie.voteAverage" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_popularity">Popularity</label>
+            <input type="number" class="form-control" name="popularity" id="field_popularity"
+                [(ngModel)]="movie.popularity" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_voteCount">Vote Count</label>
+            <input type="number" class="form-control" name="voteCount" id="field_voteCount"
+                [(ngModel)]="movie.voteCount" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_budget">Budget</label>
+            <input type="number" class="form-control" name="budget" id="field_budget"
+                [(ngModel)]="movie.budget" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_runtime">Runtime</label>
+            <input type="number" class="form-control" name="runtime" id="field_runtime"
+                [(ngModel)]="movie.runtime" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_revenue">Revenue</label>
+            <input type="number" class="form-control" name="revenue" id="field_revenue"
+                [(ngModel)]="movie.revenue" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_releaseDate">Release Date</label>
+            <input type="text" class="form-control" name="releaseDate" id="field_releaseDate"
+                [(ngModel)]="movie.releaseDate" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_overview">Overview</label>
+            <input type="text" class="form-control" name="overview" id="field_overview"
+                [(ngModel)]="movie.overview" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_status">Status</label>
+            <select class="form-control" name="status" [(ngModel)]="movie.status" id="field_status" >
+                <option value="RUMORED">RUMORED</option>
+                <option value="PLANNED">PLANNED</option>
+                <option value="IN_PRODUCTION">IN_PRODUCTION</option>
+                <option value="POST_PRODUCTION">POST_PRODUCTION</option>
+                <option value="RELEASED">RELEASED</option>
+                <option value="CANCELED">CANCELED</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="field_genres">Genres</label>
+            <select class="form-control" id="field_genres" multiple name="genres" [(ngModel)]="movie.genres">
+                <option [ngValue]="getSelected(movie.genres, genreOption)" *ngFor="let genreOption of genres; trackBy: trackGenreById">{{genreOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_keywords">Keywords</label>
+            <select class="form-control" id="field_keywords" multiple name="keywords" [(ngModel)]="movie.keywords">
+                <option [ngValue]="getSelected(movie.keywords, keywordOption)" *ngFor="let keywordOption of keywords; trackBy: trackKeywordById">{{keywordOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

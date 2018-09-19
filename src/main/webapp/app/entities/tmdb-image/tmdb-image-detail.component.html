@@ -1,0 +1,58 @@
+
+<div *ngIf="tmdbImage">
+    <h2><span>Tmdb Image</span> {{tmdbImage.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Aspect Ratio</span></dt>
+        <dd>
+            <span>{{tmdbImage.aspectRatio}}</span>
+        </dd>
+        <dt><span>Filepath</span></dt>
+        <dd>
+            <span>{{tmdbImage.filepath}}</span>
+        </dd>
+        <dt><span>Height</span></dt>
+        <dd>
+            <span>{{tmdbImage.height}}</span>
+        </dd>
+        <dt><span>Iso 6391</span></dt>
+        <dd>
+            <span>{{tmdbImage.iso6391}}</span>
+        </dd>
+        <dt><span>Width</span></dt>
+        <dd>
+            <span>{{tmdbImage.width}}</span>
+        </dd>
+        <dt><span>Image Type</span></dt>
+        <dd>
+            <span>{{tmdbImage.imageType}}</span>
+        </dd>
+        <dt><span>Movie</span></dt>
+        <dd>
+            <div *ngIf="tmdbImage.movieId">
+                <a [routerLink]="['/movie', tmdbImage.movieId]">{{tmdbImage.movieId}}</a>
+            </div>
+        </dd>
+        <dt><span>People</span></dt>
+        <dd>
+            <div *ngIf="tmdbImage.peopleId">
+                <a [routerLink]="['/people', tmdbImage.peopleId]">{{tmdbImage.peopleId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'tmdb-image/'+ tmdbImage.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,26 @@
+<nav mat-tab-nav-bar>
+
+  <span class="spacer"></span>
+  <a mat-tab-link [routerLink]="['popular']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+    Popular
+  </a>
+  <a mat-tab-link [routerLink]="['top-rated']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+    Top Rated
+  </a>
+  <a mat-tab-link *ngIf="isAuthenticated" [routerLink]="['bookmarked']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+    Bookmarked
+  </a>
+  <a mat-tab-link *ngIf="isAuthenticated" [routerLink]="['watched']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+    Watched
+  </a>
+  <a mat-tab-link *ngIf="isAuthenticated" [routerLink]="['rated']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+    Rated
+  </a>
+  <span class="spacer"></span>
+</nav>
+
+<div [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.path">
+  <router-outlet #o="outlet">
+    <!-- <div class="scrollContainer"></div> -->
+  </router-outlet>
+</div>

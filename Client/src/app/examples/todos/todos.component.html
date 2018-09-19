@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="row">
+    <div class="offset-md-2 col-md-8 entry">
+      <tbs-big-input placeholder="I am going to do..." [value]="newTodo" (keyup)="onNewTodoChange($event.target.value)" (keyup.enter)="!isAddTodoDisabled && onAddTodo()"
+        (keyup.escape)="onNewTodoClear()">
+        <tbs-big-input-action fontSet="fas" fontIcon="fa-plus" color="accent" (action)="onAddTodo()" [disabled]="isAddTodoDisabled"
+          matTooltip="Add new todo" matTooltipPosition="before">
+        </tbs-big-input-action>
+        <tbs-big-input-action fontSet="fas" fontIcon="fa-trash" color="warn" (action)="onRemoveDoneTodos()" [disabled]="isRemoveDoneTodosDisabled"
+          matTooltip="Remove done todos" matTooltipPosition="after">
+        </tbs-big-input-action>
+      </tbs-big-input>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>
+        Todo List
+        <button class="todos-filter" mat-icon-button [matMenuTriggerFor]="todosFilter">
+          <mat-icon fontSet="fas" fontIcon="fa-filter"></mat-icon>
+        </button>
+        <mat-menu class="todos-filter-menu-overlay" #todosFilter="matMenu" xPosition="before">
+          <button mat-menu-item (click)="onFilterTodos('ALL')" [ngClass]="{ active: todos.filter === 'ALL' }">
+            <mat-icon fontSet="fas" fontIcon="fa-tasks"></mat-icon>
+            <span>All</span>
+          </button>
+          <button mat-menu-item (click)="onFilterTodos('DONE')" [ngClass]="{ active: todos.filter === 'DONE' }">
+            <mat-icon fontSet="fas" fontIcon="fa-check"></mat-icon>
+            <span>Done</span>
+          </button>
+          <button mat-menu-item (click)="onFilterTodos('ACTIVE')" [ngClass]="{ active: todos.filter === 'ACTIVE' }">
+            <mat-icon fontSet="fas" fontIcon="fa-square"></mat-icon>
+            <span>Active</span>
+          </button>
+        </mat-menu>
+        <mat-chip-list class="todos-filter-info d-none d-sm-block">
+          <mat-chip>
+            Displaying {{todos.filter !== 'ALL' ? filteredTodos.length : ''}} {{todos.filter.toLowerCase()}} {{todos.filter === 'ALL'
+            ? filteredTodos.length : ''}} todo{{filteredTodos.length > 1 ? 's' : ''}}
+          </mat-chip>
+        </mat-chip-list>
+      </h2>
+      <mat-card *ngFor="let todo of filteredTodos" class="todo" [ngClass]="routeAnimationsElements">
+        <mat-checkbox class="todo-done" [checked]="todo.done" (change)="onToggleTodo(todo)"></mat-checkbox>
+        <span class="todo-label" [ngClass]="{ 'todo-label-done': todo.done }" (click)="onToggleTodo(todo)">
+          &nbsp;{{todo.name}}&nbsp;
+        </span>
+      </mat-card>
+      <br>
+      <br>
+    </div>
+    <div class="offset-md-1  col-md-5">
+      <h2>Todo Example</h2>
+      <p>
+        This is a classic
+        <code>todo</code> example with support for adding, toggling, removing and filtering of the todo items.
+      </p>
+      <p>
+        State handling is implemented using
+        <code>ngrx</code> module and support for lazy loaded reducers (this is a lazy loaded feature module).
+      </p>
+      <p>
+        Todos are persisted into local storage so you should see your todos also on later visits when using the same browser.
+      </p>
+      <br>
+    </div>
+  </div>
+
+</div>

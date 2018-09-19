@@ -1,0 +1,42 @@
+
+<div *ngIf="ratedMovie">
+    <h2><span>Rated Movie</span> {{ratedMovie.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Created On</span></dt>
+        <dd>
+            <span>{{ratedMovie.createdOn | date:'medium'}}</span>
+        </dd>
+        <dt><span>Rate</span></dt>
+        <dd>
+            <span>{{ratedMovie.rate}}</span>
+        </dd>
+        <dt><span>Movie</span></dt>
+        <dd>
+            <div *ngIf="ratedMovie.movieId">
+                <a [routerLink]="['/movie', ratedMovie.movieId]">{{ratedMovie.movieId}}</a>
+            </div>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            <div *ngIf="ratedMovie.userId">
+                <a [routerLink]="['/profile', ratedMovie.userId]">{{ratedMovie.userId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'rated-movie/'+ ratedMovie.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

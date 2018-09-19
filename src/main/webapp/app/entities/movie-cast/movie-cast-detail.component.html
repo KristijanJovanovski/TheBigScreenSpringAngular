@@ -1,0 +1,42 @@
+
+<div *ngIf="movieCast">
+    <h2><span>Movie Cast</span> {{movieCast.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Movie Role</span></dt>
+        <dd>
+            <span>{{movieCast.movieRole}}</span>
+        </dd>
+        <dt><span>Cast Order</span></dt>
+        <dd>
+            <span>{{movieCast.castOrder}}</span>
+        </dd>
+        <dt><span>Movie</span></dt>
+        <dd>
+            <div *ngIf="movieCast.movieId">
+                <a [routerLink]="['/movie', movieCast.movieId]">{{movieCast.movieId}}</a>
+            </div>
+        </dd>
+        <dt><span>People</span></dt>
+        <dd>
+            <div *ngIf="movieCast.peopleId">
+                <a [routerLink]="['/people', movieCast.peopleId]">{{movieCast.peopleId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'movie-cast/'+ movieCast.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

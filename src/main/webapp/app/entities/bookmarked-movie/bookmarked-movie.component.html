@@ -1,0 +1,70 @@
+<div>
+    <h2>
+        <span>Bookmarked Movies</span>
+        <button class="btn btn-primary float-right jh-create-entity create-bookmarked-movie" [routerLink]="['/', { outlets: { popup: ['bookmarked-movie-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Bookmarked Movie
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="bookmarkedMovies">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdOn"><span>Created On</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="movieId"><span>Movie</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="userId"><span>User</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let bookmarkedMovie of bookmarkedMovies ;trackBy: trackId">
+                <td><a [routerLink]="['../bookmarked-movie', bookmarkedMovie.id ]">{{bookmarkedMovie.id}}</a></td>
+                <td>{{bookmarkedMovie.createdOn | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="bookmarkedMovie.movieId">
+                        <a [routerLink]="['../movie', bookmarkedMovie.movieId  ]" >{{bookmarkedMovie.movieId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="bookmarkedMovie.userId">
+                        <a [routerLink]="['../profile', bookmarkedMovie.userId  ]" >{{bookmarkedMovie.userId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../bookmarked-movie', bookmarkedMovie.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'bookmarked-movie/'+ bookmarkedMovie.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'bookmarked-movie/'+ bookmarkedMovie.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

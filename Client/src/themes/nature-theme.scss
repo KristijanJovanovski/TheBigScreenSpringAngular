@@ -1,0 +1,9 @@
+$tbs-nature-primary: mat-palette($mat-brown, 700, 300, 900);
+$tbs-nature-accent: mat-palette($mat-deep-purple, 300);
+$tbs-nature-warn: mat-palette($mat-red, 600);
+
+$tbs-nature-theme: mat-light-theme(
+  $tbs-nature-primary,
+  $tbs-nature-accent,
+  $tbs-nature-warn
+);

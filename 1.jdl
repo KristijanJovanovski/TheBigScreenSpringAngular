@@ -1,0 +1,130 @@
+entity Profile{
+
+}
+
+ entity Movie (movies) {
+   imdbId String,
+   backdropPath String,
+   posterPath String,
+   originalTitle String,
+   title String,
+   originalLanguage String,
+   voteAverage Float,
+   popularity Float,
+   voteCount Long,
+   budget Long,
+   runtime Integer,
+   revenue Long,
+   releaseDate String,
+   overview String,
+   status Status
+ }
+ entity BookmarkedMovie (bookmarked_movies) {
+   createdOn Instant required
+ }
+ entity WatchedMovie (watched_movies) {
+   createdOn Instant required,
+   times Integer required
+ }
+entity RatedMovie (rated_movies) {
+   createdOn Instant required,
+   rate Float required
+ }
+ entity Genre (genres) {
+   name String required
+ }
+ entity Video (videos) {
+   videoKey String required,
+   name String required,
+   videoSite String,
+   videoSize Integer,
+   videoType VideoType
+ }
+ entity Keyword (keywords) {
+   name String required
+ }
+ entity People (people) {
+   imdbId String,
+   name String required,
+   gender Gender,
+   biography String,
+   popularity Float,
+   adult Boolean,
+   birthday Instant,
+   placeOfBirth String,
+   profilePath String,
+   deathday Instant
+ }
+ entity MovieCast (movie_cast) {
+   movieRole String,
+   castOrder Integer min(0)
+ }
+ entity MovieCrew (movie_crew) {
+   job String,
+   department String
+ }
+ entity TmdbImage (tmdb_images) {
+   aspectRatio Float,
+   filepath String required,
+   height Integer required,
+   iso6391 String,
+   width Integer required,
+   imageType ImageType required
+ }
+ enum VideoType{
+  TRAILER, TEASER, CLIP, FEATURETTE
+ }
+ enum Status {
+   RUMORED,
+   PLANNED,
+   IN_PRODUCTION,
+   POST_PRODUCTION,
+   RELEASED,
+   CANCELED
+ }
+
+ enum Gender {
+   NONE,
+   FEMALE,
+   MALE
+ }
+
+ enum ImageType {
+   PROFILE,
+   POSTER,
+   BACKDROP
+ }
+
+relationship OneToMany {
+   Movie{bookmarkedMovies} to BookmarkedMovie{movie required},
+
+   Movie{watchedMovies} to WatchedMovie{movie required},
+
+   Movie{ratedMovies} to RatedMovie{movie required},
+
+   Profile{bookmarkedMovies} to BookmarkedMovie{user required},
+   Profile{watchedMovies} to WatchedMovie{user required},
+   Profile{ratedMovies} to RatedMovie{user required},
+
+   Movie{videos} to Video{movie},
+   Movie{cast} to MovieCast{movie},
+   People{cast} to MovieCast{people},
+   Movie{crew} to MovieCrew{movie},
+   People{crew} to MovieCrew{people},
+   Movie{tmdbImages} to TmdbImage{movie},
+   People{tmdbImages} to TmdbImage{people}
+ }
+
+
+ relationship ManyToMany {
+   Movie{genres} to Genre{movies},
+   Movie{keywords} to Keyword{movie}
+ }
+
+
+
+ dto * with mapstruct
+ paginate * with infinite-scroll
+ service *  with serviceImpl
+ filter *
+

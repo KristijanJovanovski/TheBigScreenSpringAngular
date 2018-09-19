@@ -1,0 +1,46 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "movie",
+            "otherEntityName": "movie",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "videoKey",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "videoSite",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "videoSize",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "videoType",
+            "fieldType": "VideoType",
+            "fieldValues": "TRAILER,TEASER,CLIP,FEATURETTE"
+        }
+    ],
+    "changelogDate": "20180519190413",
+    "entityTableName": "videos",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true
+}

@@ -1,0 +1,55 @@
+@import 'styles-variables';
+@import '../node_modules/bootstrap/scss/bootstrap-reboot';
+@import '../node_modules/bootstrap/scss/bootstrap-grid';
+@import '../node_modules/@fortawesome/fontawesome-free-webfonts/scss/fontawesome';
+@import '../node_modules/@fortawesome/fontawesome-free-webfonts/scss/fa-solid';
+@import '../node_modules/@fortawesome/fontawesome-free-webfonts/scss/fa-brands';
+@import 'styles-reset';
+@import '../node_modules/@angular/material/theming';
+@include mat-core();
+@import 'themes/default-theme.scss';
+@import 'themes/light-theme.scss';
+@import 'themes/black-theme.scss';
+@import 'themes/nature-theme.scss';
+@import 'styles-reset.scss-theme';
+@import 'app/app.component.scss-theme';
+@import 'app/shared/big-input/big-input.component.scss-theme';
+@import 'app/examples/todos/todos.component.scss-theme';
+@import 'app/examples/stock-market/stock-market.component.scss-theme';
+@import 'app/examples/theming/parent/parent.component.scss-theme';
+@import 'app/examples/theming/child/child.component.scss-theme';
+@import 'app/examples/examples/examples.component.scss-theme';
+@import 'app/movies/components/movie-page/movie-page.scss-theme';
+@import 'app/home/landing-page/landing-page.component.scss-theme';
+@mixin custom-components-theme($theme) {
+  @include tbs-styles-reset-theme($theme);
+  @include tbs-app-component-theme($theme);
+  @include tbs-big-input-component-theme($theme);
+  @include tbs-todos-component-theme($theme);
+  @include tbs-stock-market-component-theme($theme);
+  @include tbs-parent-component-theme($theme);
+  @include tbs-child-component-theme($theme);
+  @include tbs-examples-component-theme($theme);
+  @include tbs-movie-page-component-theme($theme);
+  @include tbs-landing-page-component-theme($theme);
+}
+
+.default-theme {
+  @include angular-material-theme($tbs-theme);
+  @include custom-components-theme($tbs-theme);
+}
+
+.light-theme {
+  @include angular-material-theme($tbs-light-theme);
+  @include custom-components-theme($tbs-light-theme);
+}
+
+.black-theme {
+  @include angular-material-theme($tbs-black-theme);
+  @include custom-components-theme($tbs-black-theme);
+}
+
+.nature-theme {
+  @include angular-material-theme($tbs-nature-theme);
+  @include custom-components-theme($tbs-nature-theme);
+}

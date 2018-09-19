@@ -1,0 +1,19 @@
+@import '~@angular/material/theming';
+@mixin tbs-movie-page-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  tbs-movie-page {
+    .nav-responsive {
+      border-bottom: 2px solid mat-color($primary);
+    }
+    nav {
+      background-color: mat-color($accent);
+    }
+  }
+  .nav-responsive-overlay {
+    .active {
+      color: mat-color($primary, default-contrast);
+      background-color: mat-color($primary);
+    }
+  }
+}

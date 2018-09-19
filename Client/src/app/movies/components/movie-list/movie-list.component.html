@@ -1,0 +1,51 @@
+<mat-grid-list *ngIf="cols && aspectRatio" cols='{{cols}}' gutterSize='2px' rowHeight='{{aspectRatio}}'>
+  <mat-grid-tile *ngFor="let movie of movies$ | async">
+
+    <div class='post-spinner' *ngIf="(posting$ | async) && movie.id === postingId">
+      <div class="loader"></div>
+    </div>
+
+    <img mat-card-image class="tile-img" [ngStyle]="{'opacity': movie?.watched && category !== 'watched' ? '0.2' : ' 0.8'}" [defaultImage]='defaultImage'
+      [lazyLoad]="'https://image.tmdb.org/t/p/w'+ imageWidth+ '' + movie.posterPath" [offset]="'100'" (click)='getDetails(movie, $event)'>
+
+    <div class="movie-title">
+      <h3> {{movie?.title}}
+        <span class="year">{{ movie?.releaseDate | date:'yyyy'}}</span>
+      </h3>
+    </div>
+    <div class="description">
+      <div class="ratings">
+        <div class="rate" [class.disabled-click]='(posting$ | async)' (click)="rateMovie(movie, $event)">
+          <mat-icon fontSet="fas" fontIcon="fa-star" [class.rated-action]="movie?.rate"></mat-icon>
+          <span>{{movie?.voteAverage}}</span>
+        </div>
+      </div>
+      <div class="movie-actions">
+        <div [class.disabled-click]='(posting$ | async)' (click)="watchMovie(movie, $event)">
+          <mat-icon fontSet="fas" fontIcon="fa-eye" [class.watched-action]="movie?.watchedOn"></mat-icon>
+        </div>
+        <div [class.disabled-click]='(posting$ | async)' (click)="bookmarkMovie(movie, $event)">
+          <mat-icon fontSet="fas" fontIcon="fa-bookmark" [class.bookmarked-action]="movie?.bookmarkedOn"></mat-icon>
+        </div>
+        <div [class.disabled-click]='(posting$ | async)' (click)="playMovie(movie, $event)">
+          <mat-icon fontSet="fas" fontIcon="fa-play"></mat-icon>
+        </div>
+      </div>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]='cols' [rowspan]='1' *ngIf="!(fetching$ | async) as fetching; else loading">
+    <button mat-icon-button (click)='getMoreMovies($event)'>
+      <mat-icon fontSet="fas" fontIcon="fa-spinner fa-pulse"></mat-icon>
+    </button>
+  </mat-grid-tile>
+
+  <ng-template #loading>
+    <mat-grid-tile [colspan]='cols' [rowspan]='1' class="loading">
+      Loading more movies...
+    </mat-grid-tile>
+  </ng-template>
+  <!-- <mat-grid-tile [colspan]='cols' [rowspan]='1' class='infinite-scroll' infiniteScroll [infiniteScrollDistance]="250" [infiniteScrollThrottle]="500"
+    (scrolled)="onScroll($event)" [infiniteScrollContainer]="'.scrollContainer'" [fromRoot]="true">
+  </mat-grid-tile> -->
+</mat-grid-list>

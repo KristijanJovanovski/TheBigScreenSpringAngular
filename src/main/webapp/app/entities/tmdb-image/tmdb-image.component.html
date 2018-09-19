@@ -1,0 +1,80 @@
+<div>
+    <h2>
+        <span>Tmdb Images</span>
+        <button class="btn btn-primary float-right jh-create-entity create-tmdb-image" [routerLink]="['/', { outlets: { popup: ['tmdb-image-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Tmdb Image
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="tmdbImages">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="aspectRatio"><span>Aspect Ratio</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="filepath"><span>Filepath</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="height"><span>Height</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="iso6391"><span>Iso 6391</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="width"><span>Width</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="imageType"><span>Image Type</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="movieId"><span>Movie</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="peopleId"><span>People</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let tmdbImage of tmdbImages ;trackBy: trackId">
+                <td><a [routerLink]="['../tmdb-image', tmdbImage.id ]">{{tmdbImage.id}}</a></td>
+                <td>{{tmdbImage.aspectRatio}}</td>
+                <td>{{tmdbImage.filepath}}</td>
+                <td>{{tmdbImage.height}}</td>
+                <td>{{tmdbImage.iso6391}}</td>
+                <td>{{tmdbImage.width}}</td>
+                <td>{{tmdbImage.imageType}}</td>
+                <td>
+                    <div *ngIf="tmdbImage.movieId">
+                        <a [routerLink]="['../movie', tmdbImage.movieId  ]" >{{tmdbImage.movieId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tmdbImage.peopleId">
+                        <a [routerLink]="['../people', tmdbImage.peopleId  ]" >{{tmdbImage.peopleId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../tmdb-image', tmdbImage.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'tmdb-image/'+ tmdbImage.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'tmdb-image/'+ tmdbImage.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

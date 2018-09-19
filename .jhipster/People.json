@@ -1,0 +1,75 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "cast",
+            "otherEntityName": "movieCast",
+            "otherEntityRelationshipName": "people"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "crew",
+            "otherEntityName": "movieCrew",
+            "otherEntityRelationshipName": "people"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "tmdbImages",
+            "otherEntityName": "tmdbImage",
+            "otherEntityRelationshipName": "people"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "imdbId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "gender",
+            "fieldType": "Gender",
+            "fieldValues": "NONE,FEMALE,MALE"
+        },
+        {
+            "fieldName": "biography",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "popularity",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "adult",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "birthday",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "placeOfBirth",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "profilePath",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "deathday",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180519190415",
+    "entityTableName": "people",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true
+}

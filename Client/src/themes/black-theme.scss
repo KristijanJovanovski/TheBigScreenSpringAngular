@@ -1,0 +1,9 @@
+$tbs-black-primary: mat-palette($mat-grey, 700, 300, 900);
+$tbs-black-accent: mat-palette($mat-blue-grey, 400);
+$tbs-black-warn: mat-palette($mat-red, 500);
+
+$tbs-black-theme: mat-dark-theme(
+  $tbs-black-primary,
+  $tbs-black-accent,
+  $tbs-black-warn
+);

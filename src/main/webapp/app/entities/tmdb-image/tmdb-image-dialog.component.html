@@ -1,0 +1,104 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myTmdbImageLabel">Create or edit a Tmdb Image</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!tmdbImage.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="tmdbImage.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_aspectRatio">Aspect Ratio</label>
+            <input type="number" class="form-control" name="aspectRatio" id="field_aspectRatio"
+                [(ngModel)]="tmdbImage.aspectRatio" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_filepath">Filepath</label>
+            <input type="text" class="form-control" name="filepath" id="field_filepath"
+                [(ngModel)]="tmdbImage.filepath" required/>
+            <div [hidden]="!(editForm.controls.filepath?.dirty && editForm.controls.filepath?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.filepath?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_height">Height</label>
+            <input type="number" class="form-control" name="height" id="field_height"
+                [(ngModel)]="tmdbImage.height" required/>
+            <div [hidden]="!(editForm.controls.height?.dirty && editForm.controls.height?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.height?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.height?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_iso6391">Iso 6391</label>
+            <input type="text" class="form-control" name="iso6391" id="field_iso6391"
+                [(ngModel)]="tmdbImage.iso6391" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_width">Width</label>
+            <input type="number" class="form-control" name="width" id="field_width"
+                [(ngModel)]="tmdbImage.width" required/>
+            <div [hidden]="!(editForm.controls.width?.dirty && editForm.controls.width?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.width?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.width?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_imageType">Image Type</label>
+            <select class="form-control" name="imageType" [(ngModel)]="tmdbImage.imageType" id="field_imageType"  required>
+                <option value="PROFILE">PROFILE</option>
+                <option value="POSTER">POSTER</option>
+                <option value="BACKDROP">BACKDROP</option>
+            </select>
+            <div [hidden]="!(editForm.controls.imageType?.dirty && editForm.controls.imageType?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.imageType?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_movie">Movie</label>
+            <select class="form-control" id="field_movie" name="movie" [(ngModel)]="tmdbImage.movieId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="movieOption.id" *ngFor="let movieOption of movies; trackBy: trackMovieById">{{movieOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_people">People</label>
+            <select class="form-control" id="field_people" name="people" [(ngModel)]="tmdbImage.peopleId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="peopleOption.id" *ngFor="let peopleOption of people; trackBy: trackPeopleById">{{peopleOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

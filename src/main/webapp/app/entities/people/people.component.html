@@ -1,0 +1,76 @@
+<div>
+    <h2>
+        <span>People</span>
+        <button class="btn btn-primary float-right jh-create-entity create-people" [routerLink]="['/', { outlets: { popup: ['people-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new People
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="people">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="imdbId"><span>Imdb Id</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="gender"><span>Gender</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="biography"><span>Biography</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="popularity"><span>Popularity</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="adult"><span>Adult</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="birthday"><span>Birthday</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="placeOfBirth"><span>Place Of Birth</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="profilePath"><span>Profile Path</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="deathday"><span>Deathday</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let people of people ;trackBy: trackId">
+                <td><a [routerLink]="['../people', people.id ]">{{people.id}}</a></td>
+                <td>{{people.imdbId}}</td>
+                <td>{{people.name}}</td>
+                <td>{{people.gender}}</td>
+                <td>{{people.biography}}</td>
+                <td>{{people.popularity}}</td>
+                <td>{{people.adult}}</td>
+                <td>{{people.birthday | date:'medium'}}</td>
+                <td>{{people.placeOfBirth}}</td>
+                <td>{{people.profilePath}}</td>
+                <td>{{people.deathday | date:'medium'}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../people', people.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'people/'+ people.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'people/'+ people.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

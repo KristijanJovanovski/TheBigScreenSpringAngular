@@ -1,0 +1,94 @@
+
+<div *ngIf="movie">
+    <h2><span>Movie</span> {{movie.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Imdb Id</span></dt>
+        <dd>
+            <span>{{movie.imdbId}}</span>
+        </dd>
+        <dt><span>Backdrop Path</span></dt>
+        <dd>
+            <span>{{movie.backdropPath}}</span>
+        </dd>
+        <dt><span>Poster Path</span></dt>
+        <dd>
+            <span>{{movie.posterPath}}</span>
+        </dd>
+        <dt><span>Original Title</span></dt>
+        <dd>
+            <span>{{movie.originalTitle}}</span>
+        </dd>
+        <dt><span>Title</span></dt>
+        <dd>
+            <span>{{movie.title}}</span>
+        </dd>
+        <dt><span>Original Language</span></dt>
+        <dd>
+            <span>{{movie.originalLanguage}}</span>
+        </dd>
+        <dt><span>Vote Average</span></dt>
+        <dd>
+            <span>{{movie.voteAverage}}</span>
+        </dd>
+        <dt><span>Popularity</span></dt>
+        <dd>
+            <span>{{movie.popularity}}</span>
+        </dd>
+        <dt><span>Vote Count</span></dt>
+        <dd>
+            <span>{{movie.voteCount}}</span>
+        </dd>
+        <dt><span>Budget</span></dt>
+        <dd>
+            <span>{{movie.budget}}</span>
+        </dd>
+        <dt><span>Runtime</span></dt>
+        <dd>
+            <span>{{movie.runtime}}</span>
+        </dd>
+        <dt><span>Revenue</span></dt>
+        <dd>
+            <span>{{movie.revenue}}</span>
+        </dd>
+        <dt><span>Release Date</span></dt>
+        <dd>
+            <span>{{movie.releaseDate}}</span>
+        </dd>
+        <dt><span>Overview</span></dt>
+        <dd>
+            <span>{{movie.overview}}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+            <span>{{movie.status}}</span>
+        </dd>
+        <dt><span>Genres</span></dt>
+        <dd>
+            <span *ngFor="let genres of movie.genres; let last = last">
+                <a [routerLink]="['/genre', genres?.id ]">{{genres.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span>Keywords</span></dt>
+        <dd>
+            <span *ngFor="let keywords of movie.keywords; let last = last">
+                <a [routerLink]="['/keyword', keywords?.id ]">{{keywords.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'movie/'+ movie.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

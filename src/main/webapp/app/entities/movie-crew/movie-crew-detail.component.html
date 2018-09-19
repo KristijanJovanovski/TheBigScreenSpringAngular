@@ -1,0 +1,42 @@
+
+<div *ngIf="movieCrew">
+    <h2><span>Movie Crew</span> {{movieCrew.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Job</span></dt>
+        <dd>
+            <span>{{movieCrew.job}}</span>
+        </dd>
+        <dt><span>Department</span></dt>
+        <dd>
+            <span>{{movieCrew.department}}</span>
+        </dd>
+        <dt><span>Movie</span></dt>
+        <dd>
+            <div *ngIf="movieCrew.movieId">
+                <a [routerLink]="['/movie', movieCrew.movieId]">{{movieCrew.movieId}}</a>
+            </div>
+        </dd>
+        <dt><span>People</span></dt>
+        <dd>
+            <div *ngIf="movieCrew.peopleId">
+                <a [routerLink]="['/people', movieCrew.peopleId]">{{movieCrew.peopleId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'movie-crew/'+ movieCrew.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
